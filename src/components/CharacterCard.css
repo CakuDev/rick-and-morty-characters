@@ -1,0 +1,12 @@
+.character-card {
+    min-width: 20rem;
+    min-height: 25rem;
+    background-color: #484848;
+    border-radius: 1rem;
+}
+
+@media (prefers-color-scheme: light) {
+    .character-card {
+        background-color: #dfdfdf;
+    }
+}

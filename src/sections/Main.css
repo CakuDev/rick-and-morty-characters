@@ -1,8 +1,7 @@
 main {
-    width: 60vw;
-    max-width: 80rem;
+    width: 80%;
+    max-width: 80%;
+    min-width: 42rem;
     min-height: 30rem;
     flex-grow: 1;
-    background-color: #484848;
-    border-radius: 1rem;
 }

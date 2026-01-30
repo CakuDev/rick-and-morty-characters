@@ -1,9 +1,10 @@
 import './Main.css'
+import CharacterGrid from '../components/CharacterGrid'
 
 function Main() {
     return (
         <main>
-            <p>Rick and Morty characters soon!</p>
+            <CharacterGrid />
         </main>
     )
 }
