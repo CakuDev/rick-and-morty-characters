@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { setCharacter } from "../redux/characterSlice"
 import CharacterGrid from "./CharacterGrid"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faXmark } from "@fortawesome/free-solid-svg-icons"
+import Modal from "./utils/Modal"
 
 function FavouritesModal({ dialogRef, characterModalRef }) {
     const favourites = useSelector((state) => state.favourites.value)
@@ -15,10 +14,9 @@ function FavouritesModal({ dialogRef, characterModalRef }) {
     }
 
     return (
-        <dialog className="character-modal" ref={dialogRef}>
+        <Modal dialogRef={dialogRef}>
             <CharacterGrid characters={favourites} onClickCard={(character) => showCharacter(character)} />
-            <button className='modal-close' onClick={() => dialogRef.current.close()}><FontAwesomeIcon size="xl" icon={faXmark} /></button>
-        </dialog>
+        </Modal>
     )
 }
 

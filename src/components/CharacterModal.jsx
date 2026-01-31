@@ -7,6 +7,7 @@ import { getCharactersByLocation } from "../api/rickAndMortyApi"
 import { useEffect, useState } from "react"
 import { setCharacter } from "../redux/characterSlice"
 import { addCharacter, removeCharacter } from "../redux/favouritesSlice"
+import Modal from "./utils/Modal"
 
 function CharacterModal({ dialogRef }) {
     const character = useSelector((state) => state.character.value)
@@ -23,7 +24,7 @@ function CharacterModal({ dialogRef }) {
             .catch(setSameLocationCharacters([]))
     }, [character])
     return (
-        <dialog className="character-modal" ref={dialogRef}>
+        <Modal dialogRef={dialogRef}>
             {character && <>
                 <div className="character-info">
                     <img className='character-image' alt={character.name} src={character.image} />
@@ -42,10 +43,8 @@ function CharacterModal({ dialogRef }) {
                 }
                 <h3>Other characters from {character.location.name}</h3>
             </>}
-
             <CharacterGrid characters={sameLocationCharacters} onClickCard={(character) => dispatch(setCharacter(character))} />
-            <button className='modal-close' onClick={() => dialogRef.current.close()}><FontAwesomeIcon size="xl" icon={faXmark} /></button>
-        </dialog>
+        </Modal>
     )
 }
 

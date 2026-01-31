@@ -1,0 +1,16 @@
+.modal {
+    width: 80%;
+    height: 80%;
+    min-width: 30rem;
+    min-height: 30rem;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.close:focus {
+    outline: none;
+}
