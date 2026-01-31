@@ -14,7 +14,8 @@ function CharacterPage() {
     const [characters, setCharacters] = useState([])
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
-    const [filters, setFilters] = useState([])
+    const [filters, setFilters] = useState(new Map())
+    // Workaround to keep the select default value after re-render
     const [selectValue, setSelectValue] = useState('')
 
     function onClickCard(character) {
@@ -31,15 +32,17 @@ function CharacterPage() {
             .catch(error => console.log(error))
     }, [page, filters])
 
-    function onSearch(formData) {
-        setFilters([{ key: 'name', value: formData.get('name') },
-        { key: 'species', value: formData.get('species') },
-        { key: 'status', value: formData.get('status') }])
+    function onSearch(formData)  {
+        const newFilters = new Map()
+        newFilters.set('name', formData.get('name'))
+        newFilters.set('species', formData.get('species'))
+        newFilters.set('status', formData.get('status'))
+        setFilters(newFilters)
         setPage(1)
     }
 
     function onReset() {
-        setFilters([])
+        setFilters(new Map())
         setPage(1)
     }
 
@@ -52,8 +55,8 @@ function CharacterPage() {
     return (
         <>
             <form className='character-form' action={onSearch}>
-                <label>Name: <input name='name' defaultValue={filters[0]?.value} /></label>
-                <label>Species: <input name='species' defaultValue={filters[1]?.value} /></label>
+                <label>Name: <input name='name' defaultValue={filters.get('name')} /></label>
+                <label>Species: <input name='species' defaultValue={filters.get('species')} /></label>
                 <label>Status: <select name='status' value={selectValue} onChange={(e) => setSelectValue(e.target.value)}>
                     <option value=''></option>
                     <option value='alive'>Alive</option>

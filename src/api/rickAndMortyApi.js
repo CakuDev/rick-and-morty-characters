@@ -1,7 +1,7 @@
 const BASE_URL = 'https://rickandmortyapi.com/api'
 
-export async function getCharacters(page, filters = []) {
-    const strFilters = filters.map(f => `${f.key}=${f.value}`).join('&')
+export async function getCharacters(page, filters = new Map()) {
+    const strFilters = Array.from(filters.entries()).map(([key, value]) => `${key}=${value}`).join('&')
     let url = `${BASE_URL}/character/?page=${page}`
     if (strFilters) {
         url += '&' + strFilters
@@ -59,7 +59,7 @@ export async function getLocationById(locationId) {
 }
 
 export async function getCharactersByLocation(locationId) {
-    // locationId might be the url, so the id has to be extracted from it
+    // locationId might be the location url, so the id has to be extracted from it
     if (typeof locationId == 'string') {
         locationId = getLastSplit(locationId, '/')
     }
