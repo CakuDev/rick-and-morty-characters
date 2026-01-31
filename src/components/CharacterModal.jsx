@@ -12,9 +12,9 @@ import Modal from "./utils/Modal"
 function CharacterModal({ dialogRef }) {
     const character = useSelector((state) => state.character.value)
     const favourites = useSelector((state) => state.favourites.value)
-    
+
     const dispatch = useDispatch()
-    
+
     const [sameLocationCharacters, setSameLocationCharacters] = useState([])
 
     useEffect(() => {
@@ -38,8 +38,8 @@ function CharacterModal({ dialogRef }) {
                     </div>
                 </div>
                 {favourites.filter(c => c.id == character.id).length == 0 ?
-                <button onClick={() => dispatch(addCharacter(character))}>Add to favourites</button>
-                : <button onClick={() => dispatch(removeCharacter(character))}>Remove from favourites</button>
+                    <button onClick={() => dispatch(addCharacter(character))}>Add to favourites</button>
+                    : <button onClick={() => dispatch(removeCharacter(character))}>Remove from favourites</button>
                 }
                 <h3>Other characters from {character.location.name}</h3>
             </>}

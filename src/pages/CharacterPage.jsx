@@ -33,7 +33,7 @@ function CharacterPage() {
             .catch(error => console.log(error))
     }, [page, filters])
 
-    function onSearch(formData)  {
+    function onSearch(formData) {
         const newFilters = new Map()
         newFilters.set('name', formData.get('name'))
         newFilters.set('species', formData.get('species'))
@@ -58,9 +58,9 @@ function CharacterPage() {
             <CharacterForm filters={filters} onRandom={onRandom} onReset={onReset} onSearch={onSearch} />
             <button className='show-favourites-button' onClick={() => dialogFavouritesRef.current.showModal()}>Show favourites</button>
             <CharacterGrid characters={characters} onClickCard={onClickCard} />
-            <Pagination page={page} totalPages={totalPages} onChangedPage={(newPage) => setPage(newPage)}/>
+            <Pagination page={page} totalPages={totalPages} onChangedPage={(newPage) => setPage(newPage)} />
             <CharacterModal dialogRef={dialogDetailRef} />
-            <FavouritesModal dialogRef={dialogFavouritesRef} characterModalRef={dialogDetailRef}/>
+            <FavouritesModal dialogRef={dialogFavouritesRef} characterModalRef={dialogDetailRef} />
         </>
     )
 }

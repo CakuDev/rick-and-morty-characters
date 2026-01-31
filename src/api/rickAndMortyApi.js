@@ -16,7 +16,7 @@ export async function getCharacters(page, filters = new Map()) {
         .then(data => data)
         .catch(err => {
             console.log(err)
-            return {results: [], info: {pages: 1}}
+            return { results: [], info: { pages: 1 } }
         })
 
     return {

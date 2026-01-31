@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Modal.css'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
-function Modal({children, dialogRef}) {
+function Modal({ children, dialogRef }) {
     return (
         <dialog className="modal" ref={dialogRef}>
             {children}

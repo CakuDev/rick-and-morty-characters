@@ -1,10 +1,10 @@
 import { useState } from "react"
 import './CharacterForm.css'
 
-function CharacterForm({filters, onSearch, onReset, onRandom}) {
+function CharacterForm({ filters, onSearch, onReset, onRandom }) {
     // Workaround to keep the select default value after re-render
     const [selectValue, setSelectValue] = useState('')
-    
+
     return (
         <form className='character-form' action={onSearch}>
             <label>Name: <input name='name' defaultValue={filters.get('name')} /></label>

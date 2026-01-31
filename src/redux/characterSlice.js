@@ -6,8 +6,8 @@ export const characterSlice = createSlice({
     value: null,
   },
   reducers: {
-    setCharacter: (state, action) => {state.value = action.payload},
-    clearCharacter: (state) => {state.value = null}
+    setCharacter: (state, action) => { state.value = action.payload },
+    clearCharacter: (state) => { state.value = null }
   },
 })
 
