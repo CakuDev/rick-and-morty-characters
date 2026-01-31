@@ -15,6 +15,7 @@ function FavouritesModal({ dialogRef, characterModalRef }) {
 
     return (
         <Modal dialogRef={dialogRef}>
+            <h2>Your favourites characters</h2>
             <CharacterGrid characters={favourites} onClickCard={(character) => showCharacter(character)} />
         </Modal>
     )
