@@ -6,9 +6,12 @@ import CharacterGrid from "./CharacterGrid"
 import { getCharactersByLocation } from "../api/rickAndMortyApi"
 import { useEffect, useState } from "react"
 import { setCharacter } from "../redux/characterSlice"
+import { addCharacter, removeCharacter } from "../redux/favouritesSlice"
 
 function CharacterModal({ dialogRef }) {
     const character = useSelector((state) => state.character.value)
+    const favourites = useSelector((state) => state.favourites.value)
+    
     const dispatch = useDispatch()
     
     const [sameLocationCharacters, setSameLocationCharacters] = useState([])
@@ -33,6 +36,10 @@ function CharacterModal({ dialogRef }) {
                         <span className="data-detail">Location: {character.location.name}</span>
                     </div>
                 </div>
+                {favourites.filter(c => c.id == character.id).length == 0 ?
+                <button onClick={() => dispatch(addCharacter(character))}>Add to favourites</button>
+                : <button onClick={() => dispatch(removeCharacter(character))}>Remove from favourites</button>
+                }
                 <h3>Other characters from {character.location.name}</h3>
             </>}
 

@@ -5,22 +5,23 @@ import './CharacterPage.css'
 import CharacterModal from '../components/CharacterModal'
 import { useDispatch } from 'react-redux'
 import { setCharacter } from '../redux/characterSlice'
-import Pagination from '../components/Pagination'
+import Pagination from '../components/utils/Pagination'
+import CharacterForm from '../components/CharacterForm'
+import FavouritesModal from '../components/FavouritesModal'
 
 function CharacterPage() {
-    const dialogRef = useRef(null)
+    const dialogDetailRef = useRef(null)
+    const dialogFavouritesRef = useRef(null)
     const dispatch = useDispatch()
 
     const [characters, setCharacters] = useState([])
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
     const [filters, setFilters] = useState(new Map())
-    // Workaround to keep the select default value after re-render
-    const [selectValue, setSelectValue] = useState('')
 
     function onClickCard(character) {
         dispatch(setCharacter(character))
-        dialogRef.current.showModal()
+        dialogDetailRef.current.showModal()
     }
 
     useEffect(() => {
@@ -54,24 +55,12 @@ function CharacterPage() {
 
     return (
         <>
-            <form className='character-form' action={onSearch}>
-                <label>Name: <input name='name' defaultValue={filters.get('name')} /></label>
-                <label>Species: <input name='species' defaultValue={filters.get('species')} /></label>
-                <label>Status: <select name='status' value={selectValue} onChange={(e) => setSelectValue(e.target.value)}>
-                    <option value=''></option>
-                    <option value='alive'>Alive</option>
-                    <option value='dead'>Dead</option>
-                    <option value='unknown'>Unknown</option>
-                </select></label>
-                <div className='form-buttons'>
-                    <button type="submit">Search</button>
-                    <button type='button' onClick={onReset}>Reset</button>
-                    <button type='button' onClick={onRandom}>Pick random</button>
-                </div>
-            </form >
+            <CharacterForm filters={filters} onRandom={onRandom} onReset={onReset} onSearch={onSearch} />
+            <button className='show-favourites-button' onClick={() => dialogFavouritesRef.current.showModal()}>Show favourites</button>
             <CharacterGrid characters={characters} onClickCard={onClickCard} />
             <Pagination page={page} totalPages={totalPages} onChangedPage={(newPage) => setPage(newPage)}/>
-            <CharacterModal dialogRef={dialogRef} />
+            <CharacterModal dialogRef={dialogDetailRef} />
+            <FavouritesModal dialogRef={dialogFavouritesRef} characterModalRef={dialogDetailRef}/>
         </>
     )
 }
