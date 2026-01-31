@@ -1,24 +1,14 @@
-import CharacterCard from "./CharacterCard";
+import CharacterCard from './CharacterCard'
 import './CharacterGrid.css'
 
-function CharacterGrid() {
+function CharacterGrid({characters}) {
+    
     return (
-        <div className="character-grid">
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-        </div>
+        <>
+            <div className='character-grid'>
+                {characters.map(c => <CharacterCard key={c.id} character={c} />)}
+            </div>
+        </>
     )
 }
 

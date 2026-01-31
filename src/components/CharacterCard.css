@@ -1,12 +1,46 @@
 .character-card {
-    min-width: 20rem;
-    min-height: 25rem;
+    --card-width: 25rem;
+    --card-height: 10rem;
+    min-width: var(--card-width);
+    min-height: var(--card-height);
+    max-width: var(--card-width);
+    max-height: var(--card-height);
     background-color: #484848;
     border-radius: 1rem;
+    padding: 0.5rem;
+
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+
+    transition: scale 0.3s;
+    cursor: pointer;
+}
+
+.character-card:hover {
+    scale: 1.1;
+}
+
+.character-image {
+    display: block;
+    max-height: var(--card-height);
+    height: auto;
+    width: auto;
+    border-radius: 0.5rem;
+}
+
+.character-data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    span {
+        text-align: left;
+    }
 }
 
 @media (prefers-color-scheme: light) {
     .character-card {
-        background-color: #dfdfdf;
+        background-color: #e6e6e6;
     }
 }
