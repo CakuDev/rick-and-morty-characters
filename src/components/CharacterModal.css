@@ -1,0 +1,27 @@
+.character-modal {
+    width: 80%;
+    height: 80%;
+    min-width: 30rem;
+    min-height: 30rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.modal-close:focus {
+  outline: none;
+}
+
+.character-info {
+    display: flex;
+    gap: 2rem;
+    height: 20rem;
+}
+
+.data-detail {
+    font-size: 1.2rem;
+}
+

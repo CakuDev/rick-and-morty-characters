@@ -1,14 +1,25 @@
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getCharacters } from '../api/rickAndMortyApi'
 import CharacterGrid from './CharacterGrid'
 import './CharacterSearch.css'
+import CharacterModal from './CharacterModal'
+import { useDispatch } from 'react-redux'
+import { setCharacter } from '../redux/characterSlice'
 
 function CharacterSearch() {
+    const dialogRef = useRef(null)
+    const dispatch = useDispatch()
+
     const [characters, setCharacters] = useState([])
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
+
+    function onClickCard(character) {
+        dispatch(setCharacter(character))
+        dialogRef.current.showModal()
+    }
 
     useEffect(() => {
         getCharacters(page)
@@ -21,7 +32,7 @@ function CharacterSearch() {
 
     return (
         <>
-            <CharacterGrid characters={characters} />
+            <CharacterGrid characters={characters} onClickCard={onClickCard}/>
             <div className='pagination'>
                 <button disabled={page <= 1} onClick={() => setPage(page - 1)}><FontAwesomeIcon icon={faAngleLeft} /></button>
                 <select value={page} onChange={(e) => setPage(parseInt(e.target.value))}>
@@ -29,6 +40,7 @@ function CharacterSearch() {
                 </select>
                 <button disabled={page >= totalPages} onClick={() => setPage(page + 1)}><FontAwesomeIcon icon={faAngleRight} /></button>
             </div>
+            <CharacterModal dialogRef={dialogRef} />
         </>
     )
 }
