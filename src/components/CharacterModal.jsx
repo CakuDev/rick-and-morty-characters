@@ -10,6 +10,7 @@ import { setCharacter } from "../redux/characterSlice"
 function CharacterModal({ dialogRef }) {
     const character = useSelector((state) => state.character.value)
     const dispatch = useDispatch()
+    
     const [sameLocationCharacters, setSameLocationCharacters] = useState([])
 
     useEffect(() => {

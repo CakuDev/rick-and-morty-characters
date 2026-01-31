@@ -1,14 +1,13 @@
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
 import { getCharacters } from '../api/rickAndMortyApi'
-import CharacterGrid from './CharacterGrid'
-import './CharacterSearch.css'
-import CharacterModal from './CharacterModal'
+import CharacterGrid from '../components/CharacterGrid'
+import './CharacterPage.css'
+import CharacterModal from '../components/CharacterModal'
 import { useDispatch } from 'react-redux'
 import { setCharacter } from '../redux/characterSlice'
+import Pagination from '../components/Pagination'
 
-function CharacterSearch() {
+function CharacterPage() {
     const dialogRef = useRef(null)
     const dispatch = useDispatch()
 
@@ -68,16 +67,10 @@ function CharacterSearch() {
                 </div>
             </form >
             <CharacterGrid characters={characters} onClickCard={onClickCard} />
-            <div className='pagination'>
-                <button disabled={page <= 1} onClick={() => setPage(page - 1)}><FontAwesomeIcon icon={faAngleLeft} /></button>
-                <select value={page} onChange={(e) => setPage(parseInt(e.target.value))}>
-                    {[...Array(totalPages).keys()].map(n => <option key={n + 1} value={n + 1}>{n + 1}</option>)}
-                </select>
-                <button disabled={page >= totalPages} onClick={() => setPage(page + 1)}><FontAwesomeIcon icon={faAngleRight} /></button>
-            </div>
+            <Pagination page={page} totalPages={totalPages} onChangedPage={(newPage) => setPage(newPage)}/>
             <CharacterModal dialogRef={dialogRef} />
         </>
     )
 }
 
-export default CharacterSearch
+export default CharacterPage

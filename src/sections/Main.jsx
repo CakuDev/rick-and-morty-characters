@@ -1,10 +1,9 @@
-import CharacterSearch from '../components/CharacterSearch'
 import './Main.css'
 
-function Main() {
+function Main({children}) {
     return (
         <main>
-            <CharacterSearch />
+            {children}
         </main>
     )
 }
