@@ -32,7 +32,7 @@ function CharacterModal({ dialogRef }) {
                         <span className="data-detail">Location: {character.location.name}</span>
                     </div>
                 </div>
-                <h3>Characters from {character.location.name}</h3>
+                <h3>Other characters from {character.location.name}</h3>
             </>}
 
             <CharacterGrid characters={sameLocationCharacters} onClickCard={(character) => dispatch(setCharacter(character))} />

@@ -1,14 +1,13 @@
 import CharacterCard from './CharacterCard'
 import './CharacterGrid.css'
 
-function CharacterGrid({characters = [], onClickCard = () => {}}) {
-    
+function CharacterGrid({ characters = [], onClickCard = () => { } }) {
     return (
-        <>
-            <div className='character-grid'>
-                {characters.map(c => <CharacterCard key={c.id} character={c} onClickCard={onClickCard} />)}
-            </div>
-        </>
+        <div className='character-grid'>
+            {characters.length == 0 ?
+                <p>No characters found!</p>
+                : characters.map(c => <CharacterCard key={c.id} character={c} onClickCard={onClickCard} />)}
+        </div>
     )
 }
 

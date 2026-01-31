@@ -7,7 +7,7 @@
     max-height: var(--card-height);
     background-color: #484848;
     border-radius: 1rem;
-    padding: 0.5rem;
+    padding: 1rem;
 
     display: flex;
     justify-content: flex-start;
@@ -43,4 +43,8 @@
     .character-card {
         background-color: #e6e6e6;
     }
+}
+
+.character-name {
+    margin: .5rem;
 }

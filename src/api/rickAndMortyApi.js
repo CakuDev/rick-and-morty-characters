@@ -1,6 +1,6 @@
 const BASE_URL = 'https://rickandmortyapi.com/api'
 
-export async function getCharacters(page, filters=[]) {
+export async function getCharacters(page, filters = []) {
     const strFilters = filters.map(f => `${f.key}=${f.value}`).join('&')
     let url = `${BASE_URL}/character/?page=${page}`
     if (strFilters) {
@@ -9,11 +9,15 @@ export async function getCharacters(page, filters=[]) {
     const response = await fetch(url)
         .then(res => {
             if (!res.ok) {
-                throw new Error(`Error fetching characters data: ${res.error}`)
+                throw new Error(`Error fetching characters data: ${res.error ?? 'No error in response'}`)
             }
             return res.json()
         })
         .then(data => data)
+        .catch(err => {
+            console.log(err)
+            return {results: [], info: {pages: 1}}
+        })
 
     return {
         results: response.results,
@@ -68,5 +72,5 @@ export async function getCharactersByLocation(locationId) {
 
 function getLastSplit(str, separator) {
     const splitStr = str.split(separator)
-    return splitStr.length == 1 ? str : splitStr[splitStr.length-1]
+    return splitStr.length == 1 ? str : splitStr[splitStr.length - 1]
 }
